@@ -16,7 +16,7 @@ public class Field {
 	}
 	
 	public Field getField() {
-		return this; // nicht sicher ob das funktioniert xD
+		return this;
 	}
 	
 	
