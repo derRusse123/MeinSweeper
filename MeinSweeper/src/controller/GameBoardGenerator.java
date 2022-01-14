@@ -1,15 +1,17 @@
 package controller;
 
 import model.Field;
+import model.GameBoard;
 
 public class GameBoardGenerator {
   int gameBoardLength;
   int numberOfBombs;
   Field gameBoard[][];
   
-public GameBoardGenerator(int gameBoardLength_,int numberOfBombs_){
-  this.gameBoardLength = gameBoardLength_;
-  this.numberOfBombs = numberOfBombs_;
+public GameBoardGenerator(GameBoard mainGameBoard){
+	System.out.println(mainGameBoard.getGameBoardLength() + ", " + mainGameBoard.getNumberOfBombs());
+  this.gameBoardLength = mainGameBoard.getGameBoardLength();
+  this.numberOfBombs = mainGameBoard.getNumberOfBombs();
   gameBoard = new Field[this.gameBoardLength][this.gameBoardLength];
   //generate gameBoard
   for(int i = 0; i< this.gameBoardLength; i++) {
@@ -21,8 +23,8 @@ public GameBoardGenerator(int gameBoardLength_,int numberOfBombs_){
   
   //fill with bombs
   for(int i = 0; i<this.numberOfBombs; i++) {
-    int xValue = getRandomNumber(0,this.numberOfBombs);
-    int yValue = getRandomNumber(0,this.numberOfBombs);
+    int xValue = getRandomNumber(0,this.gameBoardLength);
+    int yValue = getRandomNumber(0,this.gameBoardLength);
     if(gameBoard[xValue][yValue].getValue() != -1) {
       gameBoard[xValue][yValue].setValue(-1);
     }
@@ -68,7 +70,7 @@ public GameBoardGenerator(int gameBoardLength_,int numberOfBombs_){
     
   }
   showTable();
-
+  mainGameBoard.setFields(gameBoard);
   }
   
   public int getRandomNumber(int min, int max) {
