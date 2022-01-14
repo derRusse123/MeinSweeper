@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane fx:id="bpIntro" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="346.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.introduction">
+   <top>
+      <Label text="INTRODUCTION" textAlignment="CENTER" BorderPane.alignment="CENTER">
+         <font>
+            <Font name="Stencil" size="35.0" />
+         </font>
+         <BorderPane.margin>
+            <Insets top="25.0" />
+         </BorderPane.margin>
+      </Label>
+   </top>
+   <bottom>
+      <Button fx:id="btnCloseIntro" mnemonicParsing="false" onAction="#closeIntro" text="CLOSE" BorderPane.alignment="TOP_CENTER">
+         <BorderPane.margin>
+            <Insets bottom="30.0" />
+         </BorderPane.margin>
+         <font>
+            <Font name="Stencil" size="20.0" />
+         </font>
+      </Button>
+   </bottom>
+   <center>
+      <Label alignment="CENTER" prefHeight="231.0" prefWidth="382.0" text="The aim of the game is to uncover all the safe fields without bombs. So you need to know exactly where each bomb is. If you accidentally discover a bomb, game is over. The uncovered numbers show you how many bombs are in the adjacent fields." textAlignment="JUSTIFY" wrapText="true" BorderPane.alignment="CENTER">
+         <font>
+            <Font name="Stencil" size="19.0" />
+         </font>
+         <BorderPane.margin>
+            <Insets left="40.0" right="40.0" />
+         </BorderPane.margin>
+      </Label>
+   </center>
+</BorderPane>

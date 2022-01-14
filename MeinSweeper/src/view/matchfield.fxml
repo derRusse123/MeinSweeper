@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MatchField">
+   <top>
+      <Label text="MineSweeper" BorderPane.alignment="CENTER">
+         <font>
+            <Font size="50.0" />
+         </font>
+      </Label>
+      <HBox BorderPane.alignment="CENTER">
+         <children>
+            <Label fx:id="timerLabel" text="0">
+               <font>
+                  <Font size="50.0" />
+               </font>
+            </Label>
+            <Button fx:id="btnStart" mnemonicParsing="false" onAction="#handle" text="Start" />
+         </children>
+      </HBox>
+   </top>
+   <bottom>
+      <Button fx:id="btnRestart" mnemonicParsing="false" onAction="#reset" text="Restart" BorderPane.alignment="CENTER" />
+   </bottom>
+</BorderPane>
