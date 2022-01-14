@@ -1,49 +1,34 @@
 package controller;
 
-import javafx.animation.Animation;
+import model.GameBoard;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.beans.InvalidationListener;
-import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.Property;
-import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-
-import java.io.File;
-import java.net.URL;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.util.ResourceBundle;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
-import model.GameBoard;
+
 
 public class MatchField {
-	private FieldResolver fieldResolver;
+	private GameBoard gameBoard = new GameBoard("Easy", 10, 15); // still weird
 	private GameBoardGenerator gameBoardGenerator;
+	private FieldResolver fieldResolver;
+	
 	private Timeline timeline;
+	Duration time = Duration.ZERO;
+	GridPane grid;
+	
 	@FXML
 	private Button btnRestart;
 	@FXML
@@ -57,35 +42,28 @@ public class MatchField {
 	@FXML
 	private IntegerProperty timeSeconds = new SimpleIntegerProperty();
 	
-	Duration time = Duration.ZERO;
-	GridPane grid;
-	
-	//We need a model.GameBoard.java...
-	private String difficulty;
-	private int gameBoardLength;
-	private int numberOfBombs;
-	
-	public void setDifficulty(String dif) {
-		difficulty = dif;
-	}
-	
-	public void evaluateDifficulty() {
-		//switch case?
-		//set gameBoardLength / Number of Bombs
-		//make window bigger
-		
-		gameBoardLength = 15;
-		numberOfBombs = 10;
+	public void initGamemode(String dif) {
+		switch(dif) {
+		case "Easy":
+			this.gameBoard = new GameBoard(dif, 10, 15);
+			break;
+		case "Moderate":
+			this.gameBoard = new GameBoard(dif, 15, 20);
+			break;
+		case "Hard":
+			this.gameBoard = new GameBoard(dif, 20, 30);
+			break;
+		}
 	}
 	
 	public void initialize() {
-	  gameBoardGenerator = new GameBoardGenerator(gameBoardLength, numberOfBombs); //getter-aufruf in GameBoard.java ?
+	  gameBoardGenerator = new GameBoardGenerator(gameBoard);
 	  grid = new GridPane();
 	  borderPane.setCenter(grid);
-	  for(int i = 0; i <15; i++) {
-		  for(int j = 0; j<15; j++) {
+	  for(int i = 0; i <gameBoard.getGameBoardLength(); i++) {
+		  for(int j = 0; j<gameBoard.getGameBoardLength(); j++) {
 			Button newButton = new Button();
-			newButton.setId("Button"+ (i + j*15 +1));
+			newButton.setId("Button"+ (i + j*gameBoard.getGameBoardLength() +1));
 			//ToDo: find a way to make it smaller and still have it showing the value
 			newButton.setMinHeight(30);
 			newButton.setMaxHeight(30);
