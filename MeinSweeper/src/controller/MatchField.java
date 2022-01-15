@@ -42,28 +42,35 @@ public class MatchField {
 	@FXML
 	private IntegerProperty timeSeconds = new SimpleIntegerProperty();
 	
-	public void initGamemode(String dif) {
+	private void initGamemode(String dif, Stage window) {
 		switch(dif) {
 		case "Easy":
 			this.gameBoard = new GameBoard(dif, 10, 15);
 			break;
 		case "Moderate":
 			this.gameBoard = new GameBoard(dif, 15, 20);
+			window.setMinHeight(600);
+			window.setMinWidth(600);
 			break;
 		case "Hard":
-			this.gameBoard = new GameBoard(dif, 20, 30);
+			this.gameBoard = new GameBoard(dif, 20, 35);
+			window.setMinHeight(800);
+			window.setMinWidth(800);
 			break;
 		}
 	}
 	
-	public void initialize() {
+	public void initMatchField(String dif, Stage window) {
+	  initGamemode(dif, window);
 	  gameBoardGenerator = new GameBoardGenerator(gameBoard);
+	  fieldResolver = new FieldResolver(gameBoard, this);
 	  grid = new GridPane();
 	  borderPane.setCenter(grid);
 	  for(int i = 0; i <gameBoard.getGameBoardLength(); i++) {
 		  for(int j = 0; j<gameBoard.getGameBoardLength(); j++) {
 			Button newButton = new Button();
-			newButton.setId("Button"+ (i + j*gameBoard.getGameBoardLength() +1));
+			int buttonId = j + i*gameBoard.getGameBoardLength() + 1;
+			newButton.setId("Button-" + buttonId);
 			//ToDo: find a way to make it smaller and still have it showing the value
 			newButton.setMinHeight(30);
 			newButton.setMaxHeight(30);
@@ -76,9 +83,10 @@ public class MatchField {
 						"-fx-background-color: grey;" +
 						"" // ToDo: add more styles if needed
 						);
-				System.out.println(event);
+				fieldResolver.openField(Integer.parseInt(newButton.getId().split("-")[1]));
+				
 			});
-			grid.add(newButton, i, j);
+			grid.add(newButton, j, i);
 		  }
 	  }
 	  grid.setAlignment(Pos.CENTER);

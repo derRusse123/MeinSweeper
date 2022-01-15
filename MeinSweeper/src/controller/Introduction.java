@@ -9,7 +9,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 
-public class introduction {
+public class Introduction {
 	@FXML
 	private Button btnCloseIntro;
 	

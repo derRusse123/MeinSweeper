@@ -21,12 +21,13 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
-public class mainpage implements Initializable{
+public class Mainpage implements Initializable{
 	private Stage stage;
 	private Scene scene;
 	private Parent root;
 	private MatchField matchField = new MatchField();
 	private ObservableList<String> oList = FXCollections.observableArrayList(getList());
+	private String difficulty;
 	@FXML
 	private Button btnQuit;	
 	@FXML
@@ -55,7 +56,7 @@ public class mainpage implements Initializable{
 	}
 	
 	public void difChanged() { // gets called onChange
-		matchField.initGamemode(choiceBoxDif.getSelectionModel().getSelectedItem());
+		difficulty = choiceBoxDif.getSelectionModel().getSelectedItem();
 	}
 	
 	public void getIntroduction(ActionEvent e) throws IOException {
@@ -81,10 +82,11 @@ public class mainpage implements Initializable{
 	
 	public void startGame() throws Exception {
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/matchfield.fxml"));
-	
+
 		Parent root = (Parent)fxmlLoader.load();
 		matchField = fxmlLoader.<MatchField>getController();
 		Stage window = (Stage) btnStart.getScene().getWindow();
+		matchField.initMatchField(difficulty, window);
 		Scene matchFieldScene = new Scene(root);
 		matchFieldScene.getStylesheets().add(getClass().getResource("/view/matchfield.css").toExternalForm());
 		window.setScene(matchFieldScene);

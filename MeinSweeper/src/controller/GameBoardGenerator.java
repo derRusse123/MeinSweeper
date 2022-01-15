@@ -9,7 +9,6 @@ public class GameBoardGenerator {
   Field gameBoard[][];
   
 public GameBoardGenerator(GameBoard mainGameBoard){
-	System.out.println(mainGameBoard.getGameBoardLength() + ", " + mainGameBoard.getNumberOfBombs());
   this.gameBoardLength = mainGameBoard.getGameBoardLength();
   this.numberOfBombs = mainGameBoard.getNumberOfBombs();
   gameBoard = new Field[this.gameBoardLength][this.gameBoardLength];
